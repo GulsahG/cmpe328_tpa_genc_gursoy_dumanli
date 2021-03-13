@@ -5,7 +5,7 @@ import GoogleAuth from './GoogleAuth';
 
 const Header = () => {
   return (
-      <Breadcrumb borderBottom="0.15em solid purple" w={{base:"75vw", md:"60vw"}} h={{base:"15vw", md:"7.5vw", lg:"6vw", xl:"4.5vw"}} m={{base:"2vw 12.5vw", md:"1vw 20vw"}} fontWeight="medium" fontSize="xl" separator="">
+      <Breadcrumb borderBottom="0.15em solid #6c4a7e" w={{base:"75vw", md:"60vw"}} h={{base:"15vw", md:"7.5vw", lg:"6vw", xl:"4.5vw"}} m={{base:"2vw 12.5vw", md:"1vw 20vw"}} fontWeight="medium" fontSize="xl" separator="">
         <BreadcrumbItem lineHeight={{base:"15vw", md:"7.5vw", lg:"6vw", xl:"4.5vw"}} p={{base:"0.2em 0.5em", md:"0.27em 1em"}} isCurrentPage>
           <Link to="/">Streamy</Link>
         </BreadcrumbItem>
