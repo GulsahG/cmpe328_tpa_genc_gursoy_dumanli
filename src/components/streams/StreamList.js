@@ -14,22 +14,26 @@ class StreamList extends React.Component {
     return (
       (stream.userId && stream.userId === this.props.currentUserId) ?
       <ButtonGroup>
-        <Button 
-          background="#ecebe1" 
-          color="#383838" 
-          variant="solid"
-          _hover={{background: "#C6B3D0"}} 
-        >
-          Edit
-        </Button>
-        <Button 
-          background="#ecebe1" 
-          color="#383838" 
-          variant="solid"
-          _hover={{background: "#C6B3D0"}} 
-        >
-          Delete
-        </Button>
+        <Link to={`/streams/edit/${stream.id}`}>
+          <Button 
+            background="#ecebe1" 
+            color="#383838" 
+            variant="solid"
+            _hover={{background: "#C6B3D0"}} 
+          >
+            Edit
+          </Button>
+        </Link>
+        <Link to={`/streams/delete/${stream.id}`}>
+          <Button 
+            background="#ecebe1" 
+            color="#383838" 
+            variant="solid"
+            _hover={{background: "#C6B3D0"}} 
+          >
+            Delete
+          </Button>
+        </Link>
       </ButtonGroup>
     : null
     );
@@ -61,17 +65,18 @@ class StreamList extends React.Component {
   renderCreate() {
     return (
       (this.props.isSignedIn) ?
-        <Button
-          variant="solid"
-          float="right"
-          background="#383838" 
-          color="white"
-          _hover={{background: "#6C4A7E"}} 
-        >
-          <Link to="/streams/new">
+        <Link to="/streams/new">
+          <Button
+            style={{margin: "2.5vw 0"}}
+            variant="solid"
+            float="right"
+            background="#383838" 
+            color="white"
+            _hover={{background: "#6C4A7E"}} 
+          >
             Create Stream
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       : null
     );
   }
@@ -79,11 +84,17 @@ class StreamList extends React.Component {
   render() {
     return (
       <List 
-        w="60vw" 
-        m="5vw 0 0 22.5vw" 
+        m={{base: "5vw 0 0 15vw", md: "5vw 0 0 22.5vw"}} 
+        w={{base: "75vw", md:"60vw"}}
         spacing={5}
       >
-        <Heading m="5% 0" as="h2" color="#383838">Streams</Heading>
+        <Heading 
+          m="5% 0" 
+          as="h3" 
+          color="#383838"
+        >
+          Streams
+        </Heading>
         {this.renderList()}
         {this.renderCreate()}
       </List>

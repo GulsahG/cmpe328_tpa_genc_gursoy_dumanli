@@ -47,8 +47,9 @@ class GoogleAuth extends React.Component {
           _focus={{
             boxShadow:
               "none",
-          }}>
-            Sign Out
+          }}
+        >
+          Sign Out
         </Button>
       : 
       <Button 
@@ -58,10 +59,11 @@ class GoogleAuth extends React.Component {
         leftIcon={<EmailIcon />}
         onClick={this.onSignInClick}
         _focus={{
-            boxShadow:
-              "none",
-        }}>
-          Sign In with Google
+          boxShadow:
+            "none",
+        }}
+      >
+        Sign In with Google
       </Button>
     );
   }
