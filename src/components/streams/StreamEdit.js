@@ -2,8 +2,9 @@ import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStream, editStream } from '../../actions';
-import { Button, Heading } from '@chakra-ui/react';
 import StreamForm from './StreamForm';
+import { Button, Heading } from '@chakra-ui/react';
+
 class StreamEdit extends React.Component {
   componentDidMount() {
     this.props.fetchStream(this.props.match.params.id);
