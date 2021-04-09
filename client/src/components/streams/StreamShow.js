@@ -10,15 +10,17 @@ class StreamShow extends React.Component {
 
   render(){
     if(!this.props.stream) {
-      return <Button 
-        w="100%" 
-        m="5% auto" 
-        size="lg" 
-        fontSize="1.5rem" 
-        isLoading 
-        colorScheme="red" 
-        variant="ghost" 
-      />
+      return (
+        <Button 
+          w="100%" 
+          m="5% auto" 
+          size="lg" 
+          fontSize="1.5rem" 
+          isLoading 
+          colorScheme="red" 
+          variant="ghost" 
+        />
+      );
     }
     return (
       <Box 
@@ -29,10 +31,22 @@ class StreamShow extends React.Component {
         flexDir="column"
         alignItems="flex-start"
       >
-        <Heading m={{base: "3vw 0", md: "1.5vw 0"}}  as="h1" color="#14a71d" size="lg" align="left">
+        <Heading 
+          m={{base: "3vw 0", md: "1.5vw 0"}}  
+          as="h1" 
+          color="#14a71d" 
+          size="lg" 
+          align="left"
+        >
           {this.props.stream.title}
         </Heading>
-        <Heading m={{base: "3vw 0", md: "1.5vw 0"}}  as="h1" color="#17141f" size="md" align="left">
+        <Heading 
+          m={{base: "3vw 0", md: "1.5vw 0"}} 
+          as="h1" 
+          color="#17141f" 
+          size="md" 
+          align="left"
+        >
           {this.props.stream.description}
         </Heading>
       </Box>

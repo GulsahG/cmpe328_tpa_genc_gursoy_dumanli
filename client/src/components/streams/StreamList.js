@@ -52,11 +52,26 @@ class StreamList extends React.Component {
           <ListIcon> 
             <CheckCircleIcon color="#17141f" />
           </ListIcon>
-          <Flex direction="column" w="85%" m="2% 2.5%">
+          <Flex 
+            direction="column" 
+            w="85%" 
+            m="2% 2.5%"
+          >
             <Link to={`/streams/${stream.id}`}>
-              <Heading as="h1" color="#14a71d" size="md" align="left">{stream.title}</Heading>
+              <Heading 
+                as="h1" 
+                color="#14a71d" 
+                size="md" 
+                align="left"
+              >
+                {stream.title}
+              </Heading>
             </Link>
-            <Text align="left">{stream.description}</Text>
+            <Text 
+              align="left"
+            >
+              {stream.description}
+            </Text>
           </Flex>
           {this.renderAdmin(stream)}
         </ListItem>

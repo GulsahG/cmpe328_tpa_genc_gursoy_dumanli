@@ -7,10 +7,10 @@ class StreamForm extends React.Component {
     const className = meta.touched && !meta.active;
     return (
       <FormControl 
-       p={{base: "1vw", md:"0.5vw"}} 
-       m={{base: "1vw 0 0 12.5vw", md: "1vw 0 0 20vw"}} 
-       w={{base: "75vw", md:"60vw"}}
-       isInvalid={(className && meta.error) ? true : false}
+        p={{base: "1vw", md:"0.5vw"}} 
+        m={{base: "1vw 0 0 12.5vw", md: "1vw 0 0 20vw"}} 
+        w={{base: "75vw", md:"60vw"}}
+        isInvalid={(className && meta.error) ? true : false}
       >
         <FormLabel 
           p={{base: "1vw", lg:"0.5vw"}}
