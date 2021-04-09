@@ -39,7 +39,8 @@ class GoogleAuth extends React.Component {
         null
       : (this.props.isSignedIn) ?
         <Button 
-          size="lg" 
+          size="lg"
+          background="#d23636"
           colorScheme="red" 
           variant="solid" 
           leftIcon={<EmailIcon />}

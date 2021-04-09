@@ -6,7 +6,7 @@ import GoogleAuth from './GoogleAuth';
 const Header = () => {
   return (
       <Breadcrumb 
-        borderBottom="0.15em solid #6c4a7e" 
+        borderBottom="0.15em solid #6441a4" 
         w={{base:"75vw", md:"60vw"}} 
         h={{base:"15vw", md:"7.5vw", lg:"6vw", xl:"4.5vw"}} 
         m={{base:"2vw 12.5vw", md:"1vw 20vw"}} 

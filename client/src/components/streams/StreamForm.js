@@ -54,7 +54,9 @@ class StreamForm extends React.Component {
           label="Enter Description" 
         />
         <Button 
-          colorScheme="purple" 
+          background="#b19dd8"
+          _hover={{background: "#6441a4", color: "white"}}
+          color="#17141f" 
           size="md" 
           m= {{sm: "4vw 0 0 15vw", md: "3vw 0 0 22.5vw", lg: "2vw 0 0 22.5vw"}}
           type="submit"

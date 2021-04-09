@@ -13,7 +13,7 @@ class StreamCreate extends React.Component {
       <div>
         <Heading 
           as="h3" 
-          color="#383838" 
+          color="#17141f" 
           m={{base: "5vw 0 0 15vw", lg:"5vw 0 0 22.5vw"}}
         >
           Create a Stream

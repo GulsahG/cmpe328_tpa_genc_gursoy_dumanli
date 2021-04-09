@@ -43,17 +43,19 @@ class StreamList extends React.Component {
     return this.props.streams.map(stream => {
       return (
         <ListItem 
-          borderBottom="3px solid #A17CB8" 
+          borderBottom="3px solid #b19dd8" 
           w="88%" 
           display="flex"
           alignItems="center" 
           key={stream.id}
         >
           <ListIcon> 
-            <CheckCircleIcon color="#383838" />
+            <CheckCircleIcon color="#17141f" />
           </ListIcon>
           <Flex direction="column" w="85%" m="2% 2.5%">
-            <Text align="left">{stream.title}</Text>
+            <Link to={`/streams/${stream.id}`}>
+              <Heading as="h1" color="#14a71d" size="md" align="left">{stream.title}</Heading>
+            </Link>
             <Text align="left">{stream.description}</Text>
           </Flex>
           {this.renderAdmin(stream)}
@@ -70,9 +72,9 @@ class StreamList extends React.Component {
             style={{margin: "2.5vw 0"}}
             variant="solid"
             float="right"
-            background="#383838" 
+            background="#17141f" 
             color="white"
-            _hover={{background: "#6C4A7E"}} 
+            _hover={{background: "#6441a4"}} 
           >
             Create Stream
           </Button>
