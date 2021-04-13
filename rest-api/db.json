@@ -20,6 +20,12 @@
       "title": "Me Streaming Component Reuse!",
       "description": "This stream is about refactoring!!!",
       "id": 4
+    },
+    {
+      "title": "New Stream",
+      "description": "Created by me (gulasz)",
+      "userId": "111895188845418610918",
+      "id": 5
     }
   ]
 }
