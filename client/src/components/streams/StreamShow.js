@@ -1,7 +1,7 @@
 import React from 'react';
 import flv from 'flv.js';
 import { connect } from 'react-redux';
-import { fetchStream, createComment } from '../../actions';
+import { fetchStream, createComment, fetchComments } from '../../actions';
 import CommentForm from './CommentForm';
 import { Button, Heading, Box } from '@chakra-ui/react';
 import { List, ListItem, ListIcon, Flex, Text } from "@chakra-ui/react";
@@ -21,11 +21,13 @@ class StreamShow extends React.Component {
     const { id } = this.props.match.params;
 
     this.props.fetchStream(id);
+    this.props.fetchComments();
     this.buildPlayer();
   }
 
   componentDidUpdate() {
     this.buildPlayer();
+    console.log(this.props.comments);
   }
 
   componentWillUnmount() {
@@ -69,7 +71,7 @@ class StreamShow extends React.Component {
     return this.props.comments ?
     this.props.comments.map(comment => {
       return (
-      comment.streamId === this.props.stream.id ?
+        comment.streamId == this.props.stream.id ?
         <ListItem 
           borderBottom="3px solid #b19dd8" 
           w="88%" 
@@ -88,7 +90,7 @@ class StreamShow extends React.Component {
             <Text 
               align="left"
             >
-              {comment.description}
+              {comment.text}
             </Text>
           </Flex>
         </ListItem>
@@ -150,12 +152,12 @@ class StreamShow extends React.Component {
         </Heading>
         {this.renderCreate()}
         <List 
-          m={{base: "5vw 0 0 15vw", md: "5vw 0 0 22.5vw"}} 
+          m={{base: "2.5vw 0 0 0", md: "2.5vw 0 0 0"}} 
           w={{base: "75vw", md:"60vw"}}
           spacing={5}
         >
         <Heading 
-          m="5% 0" 
+          m="2.5% 0" 
           as="h3" 
           color="#383838"
         >
@@ -173,9 +175,9 @@ const mapStateToProps = (state, ownProps) => {
     stream: state.streams[ownProps.match.params.id],
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn,
-    commments: state.comments
+    comments: Object.values(state.comments)
   };
 };
 
 
-export default connect(mapStateToProps, { fetchStream, createComment })(StreamShow);
+export default connect(mapStateToProps, { fetchStream, createComment, fetchComments })(StreamShow);

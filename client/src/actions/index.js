@@ -1,5 +1,4 @@
 import streams from '../apis/streams';
-import comments from '../apis/streams';
 import history from '../history';
 
 import { SIGN_IN, 
@@ -9,7 +8,8 @@ import { SIGN_IN,
   FETCH_STREAM, 
   EDIT_STREAM, 
   DELETE_STREAM,
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  FETCH_COMMENTS
 } from './types';
 
 export const signIn = (userId) => {
@@ -27,9 +27,15 @@ export const signOut = () => {
 
 export const createComment = (formValues) => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  const response = await comments.post('/comments', {...formValues, userId });
+  const response = await streams.post('/comments', {...formValues, userId });
 
   dispatch({ type: CREATE_COMMENT, payload: response.data });
+};
+
+export const fetchComments = (formValues) => async (dispatch, getState) => {
+  const response = await streams.get('/comments', formValues);
+
+  dispatch({ type: FETCH_COMMENTS, payload: response.data });
 };
 
 export const createStream = (formValues) => async (dispatch, getState) => {
