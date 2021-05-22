@@ -1,13 +1,20 @@
 import React from 'react';
 import flv from 'flv.js';
 import { connect } from 'react-redux';
-import { fetchStream } from '../../actions';
+import { fetchStream, createComment } from '../../actions';
+import CommentForm from './CommentForm';
 import { Button, Heading, Box } from '@chakra-ui/react';
+import { List, ListItem, ListIcon, Flex, Text } from "@chakra-ui/react";
+import { CheckCircleIcon } from '@chakra-ui/icons';
 
 class StreamShow extends React.Component {
   constructor(props) {
     super(props);
     this.videoRef = React.createRef();
+  }
+  
+  onSubmit = (formValues) => {
+    this.props.createComment(formValues);
   }
 
   componentDidMount() {
@@ -38,6 +45,57 @@ class StreamShow extends React.Component {
     });
     this.player.attachMediaElement(this.videoRef.current);
     this.player.load();
+  }
+
+  renderCreate() {
+    const { id } = this.props.match.params;
+    return (
+      (this.props.isSignedIn) ?
+      <div style={{width: '40vw', marginLeft: '20vw'}}>
+        <Heading 
+          as="h3" 
+          color="#17141f" 
+          m={{base: "5vw 0 0 0", lg:"5vw 0 0 0"}}
+        >
+          Add Comment
+        </Heading>
+        <CommentForm onSubmit={this.onSubmit} initialValues={{streamId: id}} />
+      </div>
+      : null
+    );
+  }
+
+  renderList() {
+    return this.props.comments ?
+    this.props.comments.map(comment => {
+      return (
+      comment.streamId === this.props.stream.id ?
+        <ListItem 
+          borderBottom="3px solid #b19dd8" 
+          w="88%" 
+          display="flex"
+          alignItems="center" 
+          key={comment.id}
+        >
+          <ListIcon> 
+            <CheckCircleIcon color="#17141f" />
+          </ListIcon>
+          <Flex 
+            direction="column" 
+            w="85%" 
+            m="2% 2.5%"
+          >
+            <Text 
+              align="left"
+            >
+              {comment.description}
+            </Text>
+          </Flex>
+        </ListItem>
+        : null
+      );
+    })
+    : null ;
   }
 
   render(){
@@ -90,14 +148,34 @@ class StreamShow extends React.Component {
         >
           {this.props.stream.description}
         </Heading>
+        {this.renderCreate()}
+        <List 
+          m={{base: "5vw 0 0 15vw", md: "5vw 0 0 22.5vw"}} 
+          w={{base: "75vw", md:"60vw"}}
+          spacing={5}
+        >
+        <Heading 
+          m="5% 0" 
+          as="h3" 
+          color="#383838"
+        >
+          Comments
+        </Heading>
+        {this.renderList()}
+      </List>
       </Box>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[ownProps.match.params.id] };
+  return { 
+    stream: state.streams[ownProps.match.params.id],
+    currentUserId: state.auth.userId,
+    isSignedIn: state.auth.isSignedIn,
+    commments: state.comments
+  };
 };
 
 
-export default connect(mapStateToProps, { fetchStream})(StreamShow);
+export default connect(mapStateToProps, { fetchStream, createComment })(StreamShow);

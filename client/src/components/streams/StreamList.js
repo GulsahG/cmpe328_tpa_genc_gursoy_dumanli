@@ -42,6 +42,7 @@ class StreamList extends React.Component {
   renderList() {
     return this.props.streams.map(stream => {
       return (
+        stream.title ?
         <ListItem 
           borderBottom="3px solid #b19dd8" 
           w="88%" 
@@ -75,6 +76,7 @@ class StreamList extends React.Component {
           </Flex>
           {this.renderAdmin(stream)}
         </ListItem>
+        : null
       );
     });
   }
