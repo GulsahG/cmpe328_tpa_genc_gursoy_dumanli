@@ -107,6 +107,15 @@ class StreamList extends React.Component {
         w={{base: "75vw", md:"60vw"}}
         spacing={5}
       >
+        <Link to="/videos">
+          <Heading 
+            m="5% 0" 
+            as="h3" 
+            color="#383838"
+          >
+            Videos
+          </Heading>
+        </Link>
         <Heading 
           m="5% 0" 
           as="h3" 

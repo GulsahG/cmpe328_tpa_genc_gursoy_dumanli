@@ -1,24 +1,20 @@
 const express = require('express');
 const app = express.Router();
 
-const fileupload = require("express-fileupload");
-app.use(fileupload({
-    limits: { fileSize: 50 * 1024 * 1024 },
-}));
+const fileUpload = require("express-fileupload");
+app.use(fileUpload());
 
-app.post('/', (req, any, res) => {
-    console.log(req.files);
+app.post('/', (req, res, next) => {
+    console.log('post req entered');
     // handle the file here
-    var file = req.files.File;
-    var fileName = file.name;
-    file.mv('../../uploads', fileName, function(err) {
-        if(err) {
-            res.send(err);
-        } else {
-            res.send("File uploaded")
-        }
+    var file = req.files.inputFile;
+    file.mv(`${__dirname}../../../uploads/${file.name}`, err => {
+    if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+    }
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     });
-    res.sendStatus(200);
 });
 
 module.exports = app;
