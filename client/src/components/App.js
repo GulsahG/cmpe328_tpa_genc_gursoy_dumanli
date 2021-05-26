@@ -6,6 +6,7 @@ import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
+import UploadVideo from './videos/UploadVideo';
 import history from '../history';
 
 import { ChakraProvider } from "@chakra-ui/react"
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/streams/edit/:id" exact component={StreamEdit} />
             <Route path="/streams/delete/:id" exact component={StreamDelete} />
             <Route path="/streams/:id" exact component={StreamShow} />
+            <Route path="/videos" exact component={UploadVideo} />
           </Switch>
         </div>
       </Router>

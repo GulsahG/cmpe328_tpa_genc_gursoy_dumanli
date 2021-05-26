@@ -71,6 +71,7 @@ class StreamShow extends React.Component {
     return this.props.comments ?
     this.props.comments.map(comment => {
       return (
+        // eslint-disable-next-line eqeqeq
         comment.streamId == this.props.stream.id ?
         <ListItem 
           borderBottom="3px solid #b19dd8" 
@@ -152,19 +153,19 @@ class StreamShow extends React.Component {
         </Heading>
         {this.renderCreate()}
         <List 
-          m={{base: "2.5vw 0 0 0", md: "2.5vw 0 0 0"}} 
+          m={{base: "2.5vw 0 2.5vw 0", md: "2.5vw 0 2.5vw 0"}} 
           w={{base: "75vw", md:"60vw"}}
           spacing={5}
         >
-        <Heading 
-          m="2.5% 0" 
-          as="h3" 
-          color="#383838"
-        >
-          Comments
-        </Heading>
-        {this.renderList()}
-      </List>
+          <Heading 
+            m="2.5% 0" 
+            as="h3" 
+            color="#383838"
+          >
+            Comments
+          </Heading>
+          {this.renderList()}
+        </List>
       </Box>
     );
   }
