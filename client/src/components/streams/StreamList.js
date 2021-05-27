@@ -86,7 +86,7 @@ class StreamList extends React.Component {
       (this.props.isSignedIn) ?
         <Link to="/streams/new">
           <Button
-            style={{margin: "2.5vw 0"}}
+            m="2.5vw"
             variant="solid"
             float="right"
             background="#17141f" 
@@ -96,7 +96,14 @@ class StreamList extends React.Component {
             Create Stream
           </Button>
         </Link>
-      : null
+      : 
+      <Text
+        m="2.5vw 0"
+        fontSize="xl"
+        float="right"
+      >
+        Sign-in to create a stream.
+      </Text>
     );
   }
 

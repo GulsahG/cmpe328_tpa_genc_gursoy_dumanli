@@ -19,10 +19,6 @@ class VideoList extends React.Component {
     this.setState({ videos: this.importAll(require.context('../../../../rest-api2/uploads', false, /\.(mp4)$/))});
   }
 
-  componentDidMount() {
-      console.log(this.state.videos);
-  }
-
   renderList() {
     return this.state.videos.map(video => {
       return (
