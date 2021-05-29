@@ -2,12 +2,13 @@ import React from 'react';
 import { List, ListItem, Flex, Heading } from "@chakra-ui/react";
 import ReactPlayer from 'react-player';
 import UploadVideo from './UploadVideo';
+//import videos from '../../apis/videos';
 
 class VideoList extends React.Component {
   constructor(props: any) {
     super(props);
     this.state = {
-        videos: null
+        videos: []
     };
   }
 
@@ -15,9 +16,13 @@ class VideoList extends React.Component {
     return r.keys().map(r);
   }
 
-  componentWillMount() {
-    this.setState({ videos: this.importAll(require.context('../../../../rest-api2/uploads', false, /\.(mp4)$/))});
-  }
+  /*componentWillMount() {
+    videos.get('/videos')
+      .then(res => {
+        console.log(res)
+        this.setState({ videos: this.importAll(require.context(res, false, /\.(mp4)$/))});
+      })
+  }*/
 
   renderList() {
     return this.state.videos.map(video => {

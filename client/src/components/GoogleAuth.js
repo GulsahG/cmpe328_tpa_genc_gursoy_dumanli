@@ -1,3 +1,4 @@
+/* global gapi */
 import React from 'react';
 import { Button } from "@chakra-ui/react";
 import { EmailIcon } from '@chakra-ui/icons';
