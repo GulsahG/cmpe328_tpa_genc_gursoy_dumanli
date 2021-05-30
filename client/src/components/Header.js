@@ -19,7 +19,7 @@ const Header = () => {
           p={{base:"0.2em 0.5em", md:"0.27em 1em"}} 
           isCurrentPage
         >
-          <Link to="/">Streamy</Link>
+          <Link to="/videos">All Videos</Link>
         </BreadcrumbItem>
         <BreadcrumbItem 
           p={{base:"0.2em 0.5em", md:"0.27em 1em"}} 

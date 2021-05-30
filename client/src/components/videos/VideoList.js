@@ -2,7 +2,7 @@ import React from 'react';
 import { List, ListItem, Flex, Heading } from "@chakra-ui/react";
 import ReactPlayer from 'react-player';
 import UploadVideo from './UploadVideo';
-//import videos from '../../apis/videos';
+import videos from '../../apis/videos';
 
 class VideoList extends React.Component {
   constructor(props: any) {
@@ -16,13 +16,14 @@ class VideoList extends React.Component {
     return r.keys().map(r);
   }
 
-  /*componentWillMount() {
+  componentWillMount() {
     videos.get('/videos')
       .then(res => {
-        console.log(res)
-        this.setState({ videos: this.importAll(require.context(res, false, /\.(mp4)$/))});
+        console.log(res.data.map(video => video.url))
+        let urlArr = res.data.filter(video => video.url.endsWith(".mp4"))
+        this.setState({ videos: urlArr.map(video => video.url)});
       })
-  }*/
+  }
 
   renderList() {
     return this.state.videos.map(video => {
@@ -51,7 +52,7 @@ class VideoList extends React.Component {
             </Heading>
             <ReactPlayer
               className='react-player fixed-bottom'
-              url= {video.default}
+              url= {video}
               width='auto'
               height='75vh'
               controls = {true}
