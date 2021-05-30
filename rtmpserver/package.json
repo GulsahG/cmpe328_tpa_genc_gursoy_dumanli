@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ffmpeg": "0.0.4",
     "node-media-server": "^2.2.4"
   }
 }

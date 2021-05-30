@@ -7,27 +7,38 @@ import { Button, Heading, Box } from '@chakra-ui/react';
 import { List, ListItem, ListIcon, Flex, Text } from "@chakra-ui/react";
 import { CheckCircleIcon } from '@chakra-ui/icons';
 
+
 class StreamShow extends React.Component {
   constructor(props) {
     super(props);
     this.videoRef = React.createRef();
+
+    const { id } = this.props.match.params;
+    
+    this.state = {
+      token: process.env.REACT_APP_AUTH_KEY,
+      id: id,
+      isAllowed: false
+    };
   }
   
   onSubmit = (formValues) => {
     this.props.createComment(formValues);
   }
 
-  componentDidMount() {
-    const { id } = this.props.match.params;
+  handleClick = () => {
+    this.setState({isAllowed: !this.state.isAllowed });
+  }
+  
 
-    this.props.fetchStream(id);
+  componentDidMount() {
+    this.props.fetchStream(this.state.id);
     this.props.fetchComments();
     this.buildPlayer();
   }
 
   componentDidUpdate() {
     this.buildPlayer();
-    console.log(this.props.comments);
   }
 
   componentWillUnmount() {
@@ -39,18 +50,15 @@ class StreamShow extends React.Component {
       return;
     }
 
-    const { id } = this.props.match.params;
-
     this.player = flv.createPlayer({
       type: "flv",
-      url: `http://localhost:8000/live/${id}.flv`,
+      url: `http://streams.eastus.azurecontainer.io:8000/live/${this.state.token}${this.state.id}.flv`,
     });
     this.player.attachMediaElement(this.videoRef.current);
     this.player.load();
   }
 
   renderCreate() {
-    const { id } = this.props.match.params;
     return (
       (this.props.isSignedIn) ?
       <div style={{width: '40vw', marginLeft: '20vw'}}>
@@ -61,9 +69,63 @@ class StreamShow extends React.Component {
         >
           Add Comment
         </Heading>
-        <CommentForm onSubmit={this.onSubmit} initialValues={{streamId: id}} />
+        <CommentForm onSubmit={this.onSubmit} initialValues={{streamId: this.state.id}} />
       </div>
-      : null
+      :
+      <Text
+        fontSize="lg"
+        w="90%"
+        align="end"
+      >
+        Sign-in to add a comment.
+      </Text>
+    );
+  }
+
+  renderStreamId() {
+    return (
+      <>
+      <Button 
+        background="#b19dd8"
+        _hover={{background: "#6441a4", color: "white"}}
+        color="#17141f" 
+        size="md" 
+        m= {{sm: "4vw 0 ", md: "3vw 0", lg: "2vw 0"}}
+        onClick={this.handleClick}
+      >
+        See OBS Information
+      </Button>
+      {(this.props.isSignedIn && this.state.isAllowed && this.props.stream.userId === this.props.currentUserId) ?
+      <Text
+        fontSize="lg"
+        align="start"
+      >
+        For Streaming on OBS services:
+        <br />
+        The Server url = "<b>rtmp://streams.eastus.azurecontainer.io:8080/live</b>"
+        <br />
+        The Stream key = "<b>{this.state.token}{this.state.id}"</b>
+        <br />
+        <i>You may need to refresh the page after starting the stream.</i>
+      </Text>
+      : 
+      (!this.props.isSignedIn && this.state.isAllowed) ?
+      <Text
+        fontSize="lg"
+        align="start"
+      >
+        Sign-in to start streaming.
+      </Text>
+      :
+      (!(this.props.stream.userId === this.props.currentUserId) && this.state.isAllowed) ?
+      <Text
+        fontSize="lg"
+        align="start"
+      >
+        This is not your stream.
+      </Text>
+      : null}
+      </>
     );
   }
 
@@ -151,6 +213,7 @@ class StreamShow extends React.Component {
         >
           {this.props.stream.description}
         </Heading>
+        {this.renderStreamId()}
         {this.renderCreate()}
         <List 
           m={{base: "2.5vw 0 2.5vw 0", md: "2.5vw 0 2.5vw 0"}} 
